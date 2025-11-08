@@ -1,7 +1,4 @@
-// "dotenv": "^17.2.3",
-//     "express": "^5.1.0",
-//     "express-validator": "^7.3.0",
-//     "mysql2": "^3.15.3"
+PORT=3000
 
 import express from 'express';
 import 'dotenv/config' 
