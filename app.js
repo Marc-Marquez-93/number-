@@ -1,4 +1,3 @@
-PORT=3000
 
 import express from 'express';
 import 'dotenv/config' 
