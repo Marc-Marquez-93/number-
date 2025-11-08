@@ -1,24 +1,3 @@
-// import {
-// crearUsuario
-// } from '../models/usuariosModels.js';
-
-// export const postUsuario = async (req,res)=>{
-//     const{id,nombre,email,fecha_nacimiento,estado,fecha_registro}=req.body;
-// try{
-//     const [result] = await UsuarioModel.crearUsuario({
-//       nombre,
-//       email,
-//       fecha_nacimiento
-// });
-
-//   res.json({ message: 'Usuario creado', id: result.insertId });
-//   } catch (error) {
-//     res.status(500).json({ error: 'Error al crear usuario' });
-//   }
-// }
-
-
-// controllers/usuarioController.js
 import { UsuariosModel } from '../models/usuariosModel.js';
 
 export const postUsuario = async (req, res) => {
