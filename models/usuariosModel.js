@@ -19,13 +19,6 @@ export const UsuariosModel = {
   }
 };
 
-// export const getUsuariosModelid = {
-//   obtenerUsuarios: async () => {
-//     const [rows] = await pool.query(`SELECT * FROM usuarios WHERE id=?`);
-//     return rows;
-//   }
-// };
-
 export const getUsuariosModelid = {
   obtenerUsuarioPorId: async (id) => {
     const [rows] = await pool.query(
@@ -48,8 +41,6 @@ export const updateUsuarioModel= {
   }
 };
 
-
-
 export const deletemodelid = {
   deleteusuario: async (id) => {
     const [result] = await pool.query(
@@ -59,15 +50,3 @@ export const deletemodelid = {
     return result;
   }
 };
-
-
-
-
-
-
-
-
-
-
-    
-

@@ -1,30 +1,24 @@
 import { deletemodelid, UsuariosModel } from '../models/usuariosModel.js';
-import { getUsuariosModel } from '../models/usuariosModel.js';
-import { getUsuariosModelid } from '../models/usuariosModel.js';
-import { updateUsuarioModel } from '../models/usuariosModel.js';
-
+import {
+  getUsuariosModel,
+  getUsuariosModelid,
+  updateUsuarioModel
+} from '../models/usuariosModel.js';
 
 export const getUsuario = async (req, res) => {
   try {
-    const usuarios = await getUsuariosModel.obtenerUsuarios();  
+    const usuarios = await getUsuariosModel.obtenerUsuarios();
     return res.json(usuarios);
   } catch (error) {
     return res.status(500).json({ error: 'Error al obtener los usuarios' });
   }
 };
 
-
-
-
-
 export const putuser = async (req, res) => {
   try {
 
-
     const { id, nombre, email, fecha_nacimiento, estado } = req.body;
 
-
-    // Validar que id venga
     if (!id) {
       return res.status(400).json({ error: 'El ID es requerido' });
     }
@@ -48,16 +42,6 @@ export const putuser = async (req, res) => {
   }
 };
 
-// export const getUsuarioid = async (req, res)=>{
-//   try{
-//     const usuariosid = await getUsuariosModelid.  obtenerUsuarioPorId(id);
-//     return res.json(usuariosid)
-//   } catch(error){
-//     return res.status(500).json({ error: 'Error al obtener los usuarios por id' });
-//   }
-//   }
-
-
 
 export const getUsuarioid = async (req, res) => {
   try {
@@ -71,17 +55,6 @@ export const getUsuarioid = async (req, res) => {
     return res.status(500).json({ error: 'Error al obtener el usuario por id' });
   }
 };
-
-// export const deleteuser = async(req, res)=>{
-//   try{
-//     const {id} = req.params;
-//   const usuario = await  deletemodelid.deleteusuario(id);
-//   return res.json(result)
-//   }
-//   catch (error) {
-//     return res.status(500).json({ error: 'Error al obtener el usuario por id' });
-//   }
-// }
 
 export const deleteuser = async (req, res) => {
   try {
@@ -100,11 +73,8 @@ export const deleteuser = async (req, res) => {
   }
 };
 
-
-
 export const postUsuario = async (req, res) => {
   try {
-    // Generas la fecha internamente
     const fecha_registro = new Date.now();
 
     const {
@@ -113,7 +83,7 @@ export const postUsuario = async (req, res) => {
       email,
       fecha_nacimiento,
       estado
-    } = req.body; // ✅ NO recibes fecha_registro del usuario
+    } = req.body;
 
     const result = await UsuariosModel.crearUsuario({
       id,
@@ -121,7 +91,7 @@ export const postUsuario = async (req, res) => {
       email,
       fecha_nacimiento,
       estado,
-      fecha_registro // ✅ usando la fecha generada internamente
+      fecha_registro
     });
 
     return res.json({
