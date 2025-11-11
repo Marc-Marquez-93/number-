@@ -36,6 +36,36 @@ export const getUsuariosModelid = {
   }
 };
 
+export const updateUsuarioModel= {
+ actualizarUsuario: async ({ id, nombre, email, fecha_nacimiento, estado }) => {
+    const [result] = await pool.query(
+       `UPDATE usuarios
+       SET nombre = ?, email = ?, fecha_nacimiento = ?, estado = ?
+       WHERE id = ?`,
+      [nombre, email, fecha_nacimiento, estado, id]
+    );
+    return result;
+  }
+};
+
+
+
+export const deletemodelid = {
+  deleteusuario: async (id) => {
+    const [result] = await pool.query(
+      `DELETE FROM usuarios WHERE id = ?`,
+      [id]
+    );
+    return result;
+  }
+};
+
+
+
+
+
+
+
 
 
 
