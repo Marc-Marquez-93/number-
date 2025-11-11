@@ -2,7 +2,8 @@ import { Router } from 'express';
 import {
     generarLecturaPrincipal,
     generarLecturaDiaria,
-    getLecturasPorUsuario
+    getLecturasPorUsuario,
+    getLecturaPorId
 } from '../controllers/lecturasController.js';
 
 
