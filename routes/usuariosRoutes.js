@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { postUsuario } from '../controllers/usuariosController.js';
 import { getUsuario } from '../controllers/usuariosController.js';
+import { getUsuarioid } from '../controllers/usuariosController.js';
 import { validarCreacionUsuario } from '../validators/usuariosValidator.js';
 
 
