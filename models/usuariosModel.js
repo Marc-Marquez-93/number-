@@ -4,7 +4,7 @@ export const UsuariosModel = {
   crearUsuario: async ({ id, nombre, email, fecha_nacimiento, estado, fecha_registro }) => {
     const [result] = await pool.query(
       `INSERT INTO usuarios (id, nombre, email, fecha_nacimiento, estado, fecha_registro)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+       VALUES ( ?, ?, ?, ?, ?, ?)`,
       [id, nombre, email, fecha_nacimiento, estado, fecha_registro]
     );
 

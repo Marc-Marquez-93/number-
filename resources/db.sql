@@ -14,7 +14,7 @@ CREATE TABLE lecturas (
     id INT PRIMARY KEY AUTO_INCREMENT,
     usuario_id INT NOT NULL,
     contenido TEXT,
-    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    estado ENUM('principal', 'diaria') DEFAULT 'diaria',
     fecha_lectura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_lecturas_usuario
         FOREIGN KEY (usuario_id)
