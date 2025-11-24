@@ -1,7 +1,6 @@
 import axios from "axios";
 import pool from "../config/db.js";
 
-// ✅ lecturasModel.js
 const lecturasModel = {
     generarLecturaNumerologica: async (usuario_id) => {
         try {
@@ -33,7 +32,6 @@ const lecturasModel = {
                 day: "numeric"
             });
 
-            // 🔑 Intento con 3 API Keys
             const keys = [
                 process.env.API_KEY,
                 process.env.API_KEY2,
@@ -79,7 +77,7 @@ const lecturasModel = {
 
             const fechaActual = new Date().toISOString().slice(0, 19).replace("T", " ");
             console.log(`💾 Lectura principal guardada correctamente el ${fechaActual}.`);
-            return { fecha: fechaActual, respuesta };
+            return {id:usuario_id, fecha: fechaActual, respuesta };
 
         } catch (err) {
             console.error("❌ Error al generar lectura numerológica principal:", err);
@@ -88,7 +86,6 @@ const lecturasModel = {
     },
     generarLecturaDiaria: async (usuario_id) => {
         try {
-            // 🧩 1️⃣ Validar que el usuario esté activo
             const [usuario] = await pool.query(
                 `SELECT estado, fecha_nacimiento FROM usuarios WHERE id = ? LIMIT 1`,
                 [usuario_id]
@@ -104,7 +101,6 @@ const lecturasModel = {
                 return null;
             }
 
-            // 📅 2️⃣ Verificar si ya existe una lectura diaria hoy
             const hoy = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
             const [lecturaHoy] = await pool.query(
@@ -121,14 +117,12 @@ const lecturasModel = {
                 return null;
             }
 
-            // 🧠 3️⃣ Obtener la fecha de nacimiento para el análisis
             const fechaNacimiento = new Date(usuario[0].fecha_nacimiento).toLocaleDateString("es-ES", {
                 year: "numeric",
                 month: "long",
                 day: "numeric"
             });
 
-            // 🔑 4️⃣ Intentar con varias API keys
             const keys = [
                 process.env.API_KEY,
                 process.env.API_KEY2,
@@ -170,7 +164,6 @@ const lecturasModel = {
                 return null;
             }
 
-            // 💾 5️⃣ Guardar lectura diaria
             await pool.query(
                 `INSERT INTO lecturas (usuario_id, contenido, estado) VALUES (?, ?, 'diaria')`,
                 [usuario_id, respuesta]
@@ -179,7 +172,7 @@ const lecturasModel = {
             const fechaActual = new Date().toISOString().slice(0, 19).replace("T", " ");
             console.log(`💾 Lectura diaria guardada correctamente el ${fechaActual}.`);
 
-            return { fecha: fechaActual, respuesta };
+            return {id:usuario_id, fecha: fechaActual, respuesta };
 
         } catch (err) {
             console.error("❌ Error al generar lectura numerológica diaria:", err);
