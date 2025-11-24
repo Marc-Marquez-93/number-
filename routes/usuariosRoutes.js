@@ -1,19 +1,24 @@
 import { Router } from 'express';
-import { postUsuario, putuser } from '../controllers/usuariosController.js';
+import { postUsuario, putuser, patchEstadoUsuario } from '../controllers/usuariosController.js';
 import { getUsuario } from '../controllers/usuariosController.js';
 import { getUsuarioid } from '../controllers/usuariosController.js';
-import { validarCreacionUsuario } from '../validators/usuariosValidator.js';
 import { deleteuser } from '../controllers/usuariosController.js';
-
-
+import {
+  validarCreacionUsuario,
+  validarActualizarUsuario,
+  validarGetUsuarioPorId,
+  validarEliminarUsuario,
+  validarPatchEstadoUsuario
+} from '../validators/usuariosValidator.js';
+import { validateResult } from '../validators/validateResult.js';
 
 const router = Router();
 
 router.get('/', getUsuario );
-router.get('/:id', getUsuarioid);
-router.post('/', validarCreacionUsuario, postUsuario);
-router.put('/:id', putuser);
-// router.patch('/:id/estado', );
-router.delete('/:id', deleteuser );
+router.get('/:id', validarGetUsuarioPorId, validateResult, getUsuarioid);
+router.post('/', validarCreacionUsuario, validateResult, postUsuario);
+router.put('/:id', validarActualizarUsuario, validateResult, putuser);
+router.patch('/:id', validarPatchEstadoUsuario, validateResult, patchEstadoUsuario);
+router.delete('/:id', validarEliminarUsuario, validateResult, deleteuser);
 
 export default router;

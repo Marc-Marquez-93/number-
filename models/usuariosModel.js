@@ -1,11 +1,11 @@
 import pool from '../config/db.js';
 
 export const UsuariosModel = {
-  crearUsuario: async ({ id, nombre, email, fecha_nacimiento, estado, fecha_registro }) => {
+  crearUsuario: async ({ nombre, email, fecha_nacimiento, estado }) => {
     const [result] = await pool.query(
-      `INSERT INTO usuarios (id, nombre, email, fecha_nacimiento, estado, fecha_registro)
-       VALUES ( ?, ?, ?, ?, ?, ?)`,
-      [id, nombre, email, fecha_nacimiento, estado, fecha_registro]
+      `INSERT INTO usuarios (nombre, email, fecha_nacimiento, estado)
+       VALUES (?, ?, ?, ?)`,
+      [nombre, email, fecha_nacimiento, estado]
     );
 
     return result;
@@ -29,13 +29,25 @@ export const getUsuariosModelid = {
   }
 };
 
-export const updateUsuarioModel= {
- actualizarUsuario: async ({ id, nombre, email, fecha_nacimiento, estado }) => {
+export const updateUsuarioModel = {
+  actualizarUsuario: async ({ id, nombre, email, fecha_nacimiento, estado }) => {
     const [result] = await pool.query(
-       `UPDATE usuarios
+      `UPDATE usuarios
        SET nombre = ?, email = ?, fecha_nacimiento = ?, estado = ?
        WHERE id = ?`,
       [nombre, email, fecha_nacimiento, estado, id]
+    );
+    return result;
+  }
+};
+
+export const updateEstadoUsuarioModel = {
+  actualizarEstado: async ({ id, estado }) => {
+    const [result] = await pool.query(
+      `UPDATE usuarios
+       SET estado = ?
+       WHERE id = ?`,
+      [estado, id]
     );
     return result;
   }
